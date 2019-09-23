@@ -63,7 +63,7 @@ export function SearchableSelect(props: SearchableSelectProps) {
         }}
         {...others}
       >
-        <ClickAwayListener onClickAway={() => {}}>
+        <ClickAwayListener onClickAway={() => null}>
           <ListItem>
             <TextField
               fullWidth
@@ -75,7 +75,7 @@ export function SearchableSelect(props: SearchableSelectProps) {
                 // Prevent MUI-Autoselect while typing
                 e.stopPropagation();
               }}
-            ></TextField>
+            />
           </ListItem>
         </ClickAwayListener>
         <MenuItem>{removeSelectionText || "Remove selection"}</MenuItem>

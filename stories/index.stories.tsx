@@ -21,14 +21,14 @@ const SearchableSelectWrapper = () => {
         { id: 2, value: "Entry 2" },
         { id: 3, value: "Entry 3" }
       ]}
-    ></SearchableSelect>
+    />
   );
 };
 
 storiesOf("Searchable Select", module).add("Examples", () => {
   return (
     <div>
-      <SearchableSelectWrapper></SearchableSelectWrapper>
+      <SearchableSelectWrapper />
     </div>
   );
 });

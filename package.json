@@ -1,7 +1,7 @@
 {
   "name": "@dccs/react-searchable-select-mui",
-  "version": "0.5.1",
-  "description": "Simple Formik <-> MaterialUI wrappers",
+  "version": "0.1.0",
+  "description": "Searchable Select MUI",
   "main": "lib/index.js",
   "scripts": {
     "watch": "tsc --watch",
