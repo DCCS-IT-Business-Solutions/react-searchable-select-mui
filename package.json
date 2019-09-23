@@ -1,0 +1,94 @@
+{
+  "name": "@dccs/react-searchable-select-mui",
+  "version": "0.5.1",
+  "description": "Simple Formik <-> MaterialUI wrappers",
+  "main": "lib/index.js",
+  "scripts": {
+    "watch": "tsc --watch",
+    "build": "npm-run-all -s lint transpile build-storybook",
+    "transpile": "tsc",
+    "lint": "tslint ./src/**/*.ts*",
+    "postinstall": "rimraf node_modules/@date-io/date-fns/type/index.d.ts",
+    "test": "jest --runInBand --coverage --passWithNoTests",
+    "storybook": "start-storybook -p 6006 -c .storybook",
+    "build-storybook": "build-storybook -o docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DCCS-IT-Business-Solutions/react-searchable-select-mui.git"
+  },
+  "keywords": [
+    "npm",
+    "yarn",
+    "node",
+    "react",
+    "javascript",
+    "typescript",
+    "materialUI",
+    "material-UI",
+    "material UI",
+    "materialUI",
+    "ui",
+    "search",
+    "searchable",
+    "form",
+    "dropdown",
+    "select",
+    "mui"
+  ],
+  "author": "Manuel Vitzthum",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DCCS-IT-Business-Solutions/react-searchable-select-mui/issues"
+  },
+  "homepage": "https://github.com/DCCS-IT-Business-Solutions/react-searchable-select-mui#readme",
+  "peerDependencies": {
+    "react": "^16.8.0",
+    "@material-ui/core": ">=4.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@material-ui/core": "4.3.1",
+    "@storybook/addon-actions": "^5.1.10",
+    "@storybook/addon-links": "^5.1.10",
+    "@storybook/addons": "^5.1.10",
+    "@storybook/react": "^5.1.10",
+    "@types/jest": "^24.0.17",
+    "@types/react": "16.8.25",
+    "@types/react-dom": "16.8.5",
+    "@types/storybook__react": "^4.0.2",
+    "@types/styled-components": "^4.1.18",
+    "awesome-typescript-loader": "^5.2.1",
+    "babel-loader": "^8.0.6",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "jest": "^24.8.0",
+    "npm-run-all": "^4.1.5",
+    "react": "^16.8.6",
+    "react-docgen-typescript-loader": "^3.1.0",
+    "react-docgen-typescript-webpack-plugin": "^1.1.0",
+    "react-dom": "^16.8.6",
+    "rimraf": "^3.0.0",
+    "tslint": "^5.18.0",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-react": "^4.0.0",
+    "typescript": "^3.6.2"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx)$": "<rootDir>/preprocessor.js"
+    },
+    "testMatch": [
+      "**/__tests__/**/*.ts?(x)",
+      "c**/?(*.)(spec|test).ts?(x)"
+    ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/setupTests.js"
+    ]
+  }
+}
