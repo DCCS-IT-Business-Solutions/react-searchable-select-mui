@@ -9,8 +9,13 @@ import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import { FormHelperTextProps } from "@material-ui/core/FormHelperText";
 import highlightQuery from "./highlightQuery";
 
+interface IIdValuePair {
+  id: any;
+  value: string;
+}
+
 interface IBaseProps {
-  options?: any; // TODO: welchen Typ brauch ich für ein Array aus Objects das aus key + value besteht?
+  // TODO: welchen Typ brauch ich für ein Array aus Objects das aus key + value besteht?
   label?: string;
   searchFieldPlaceholder?: string;
   removeSelectionText?: string;
@@ -19,7 +24,20 @@ interface IBaseProps {
   formHelperTextProps?: FormHelperTextProps;
 }
 
-export type SearchableSelectProps = IBaseProps & SelectProps;
+interface IDefaultIdValueArray extends IBaseProps {
+  options: IIdValuePair[];
+}
+
+interface ICustomIdValueProps extends IBaseProps {
+  idProps: (option: any) => any;
+  valueProps: (option: any) => string;
+  options: any[];
+}
+
+export type SearchableSelectProps = (
+  | IDefaultIdValueArray
+  | ICustomIdValueProps) &
+  SelectProps;
 
 export function SearchableSelect(props: SearchableSelectProps) {
   const [query, setQuery] = React.useState("");
@@ -37,6 +55,15 @@ export function SearchableSelect(props: SearchableSelectProps) {
     formHelperTextProps,
     ...others
   } = props;
+
+  // Customprops
+  let { idProps, valueProps } = props as (ICustomIdValueProps & SelectProps);
+
+  // Customprops Undefined? Use defaults
+  if (!idProps && !valueProps) {
+    idProps = (option: IIdValuePair) => option.id;
+    valueProps = (option: IIdValuePair) => option.value;
+  }
 
   const defaultProps = {
     style: { minWidth: "240px" }
@@ -82,16 +109,19 @@ export function SearchableSelect(props: SearchableSelectProps) {
         {options &&
           options.filter &&
           options
-            .filter(
-              (x: any) =>
-                !x.value ||
-                (x.value &&
-                  x.value.toLowerCase &&
-                  x.value.toLowerCase().indexOf(query.toLowerCase()) !== -1)
-            )
-            .map((d: any) => (
-              <MenuItem key={d.id} value={d.id}>
-                {highlightQuery(d.value, query)}
+            .filter((option: IIdValuePair | any) => {
+              return (
+                !valueProps(option) ||
+                (valueProps(option) &&
+                  valueProps(option).toLowerCase &&
+                  valueProps(option)
+                    .toLowerCase()
+                    .indexOf(query.toLowerCase()) !== -1)
+              );
+            })
+            .map((option: IIdValuePair | any) => (
+              <MenuItem key={idProps(option)} value={idProps(option)}>
+                {highlightQuery(valueProps(option), query)}
               </MenuItem>
             ))}
       </Select>
