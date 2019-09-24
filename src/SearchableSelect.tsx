@@ -15,7 +15,6 @@ interface IKeyValuePair {
 }
 
 interface IBaseProps {
-  // TODO: welchen Typ brauch ich für ein Array aus Objects das aus key + value besteht?
   label?: string;
   searchFieldPlaceholder?: string;
   removeSelectionText?: string;
