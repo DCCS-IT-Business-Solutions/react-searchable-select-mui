@@ -42,9 +42,9 @@ const SearchableSelectWrapper2 = () => {
       value={value}
       onChange={handleChange}
       options={[
-        { id: 1, value: "Entry 1" },
-        { id: 2, value: "Entry 2" },
-        { id: 3, value: "Entry 3" }
+        { key: 1, value: "Entry 1" },
+        { key: 2, value: "Entry 2" },
+        { key: 3, value: "Entry 3" }
       ]}
     />
   );

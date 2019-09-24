@@ -2,8 +2,8 @@
 import { SelectProps } from "@material-ui/core/Select";
 import { FormControlProps } from "@material-ui/core/FormControl";
 import { FormHelperTextProps } from "@material-ui/core/FormHelperText";
-interface IIdValuePair {
-    id: any;
+interface IKeyValuePair {
+    key: any;
     value: string;
 }
 interface IBaseProps {
@@ -14,15 +14,15 @@ interface IBaseProps {
     formControlProps?: FormControlProps;
     formHelperTextProps?: FormHelperTextProps;
 }
-interface IDefaultIdValueArray extends IBaseProps {
-    options: IIdValuePair[];
+interface IDefaultKeyValueArray extends IBaseProps {
+    options: IKeyValuePair[];
 }
-interface ICustomIdValueProps extends IBaseProps {
-    keyPropFn: (option: any) => any;
-    valuePropFn: (option: any) => string;
+interface ICustomKeyValueProps extends IBaseProps {
+    keyPropFn: (option: IKeyValuePair | any) => any;
+    valuePropFn: (option: IKeyValuePair | any) => string;
     options: any[];
 }
-export declare type SearchableSelectProps = (IDefaultIdValueArray | ICustomIdValueProps) & SelectProps;
+export declare type SearchableSelectProps = (IDefaultKeyValueArray | ICustomKeyValueProps) & SelectProps;
 export declare function SearchableSelect(props: SearchableSelectProps): JSX.Element;
 export declare namespace SearchableSelect {
     var displayName: string;

@@ -9,8 +9,8 @@ import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import { FormHelperTextProps } from "@material-ui/core/FormHelperText";
 import highlightQuery from "./highlightQuery";
 
-interface IIdValuePair {
-  id: any;
+interface IKeyValuePair {
+  key: any;
   value: string;
 }
 
@@ -24,19 +24,19 @@ interface IBaseProps {
   formHelperTextProps?: FormHelperTextProps;
 }
 
-interface IDefaultIdValueArray extends IBaseProps {
-  options: IIdValuePair[];
+interface IDefaultKeyValueArray extends IBaseProps {
+  options: IKeyValuePair[];
 }
 
-interface ICustomIdValueProps extends IBaseProps {
-  keyPropFn: (option: any) => any;
-  valuePropFn: (option: any) => string;
+interface ICustomKeyValueProps extends IBaseProps {
+  keyPropFn: (option: IKeyValuePair | any) => any;
+  valuePropFn: (option: IKeyValuePair | any) => string;
   options: any[];
 }
 
 export type SearchableSelectProps = (
-  | IDefaultIdValueArray
-  | ICustomIdValueProps) &
+  | IDefaultKeyValueArray
+  | ICustomKeyValueProps) &
   SelectProps;
 
 export function SearchableSelect(props: SearchableSelectProps) {
@@ -57,12 +57,13 @@ export function SearchableSelect(props: SearchableSelectProps) {
   } = props;
 
   // Customprops
-  let { keyPropFn, valuePropFn } = props as (ICustomIdValueProps & SelectProps);
+  let { keyPropFn, valuePropFn } = props as (ICustomKeyValueProps &
+    SelectProps);
 
   // Customprops Undefined? Use defaults
   if (!keyPropFn && !valuePropFn) {
-    keyPropFn = (option: IIdValuePair) => option.id;
-    valuePropFn = (option: IIdValuePair) => option.value;
+    keyPropFn = (option: IKeyValuePair) => option.key;
+    valuePropFn = (option: IKeyValuePair) => option.value;
   }
 
   const defaultProps = {
@@ -109,7 +110,7 @@ export function SearchableSelect(props: SearchableSelectProps) {
         {options &&
           options.filter &&
           options
-            .filter((option: IIdValuePair | any) => {
+            .filter((option: IKeyValuePair | any) => {
               return (
                 !valuePropFn(option) ||
                 (valuePropFn(option) &&
@@ -119,7 +120,7 @@ export function SearchableSelect(props: SearchableSelectProps) {
                     .indexOf(query.toLowerCase()) !== -1)
               );
             })
-            .map((option: IIdValuePair | any) => (
+            .map((option: IKeyValuePair | any) => (
               <MenuItem key={keyPropFn(option)} value={keyPropFn(option)}>
                 {highlightQuery(valuePropFn(option), query)}
               </MenuItem>
