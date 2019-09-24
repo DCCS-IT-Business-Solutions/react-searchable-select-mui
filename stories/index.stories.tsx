@@ -21,8 +21,8 @@ const SearchableSelectWrapper = () => {
         { name: 2, property: "Entry 2" },
         { name: 3, property: "Entry 3" }
       ]}
-      idProps={(option: any) => option.name}
-      valueProps={(option: any) => option.property}
+      keyPropFn={(option: any) => option.name}
+      valuePropFn={(option: any) => option.property}
     />
   );
 };

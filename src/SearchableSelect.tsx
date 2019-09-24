@@ -29,8 +29,8 @@ interface IDefaultIdValueArray extends IBaseProps {
 }
 
 interface ICustomIdValueProps extends IBaseProps {
-  idProps: (option: any) => any;
-  valueProps: (option: any) => string;
+  keyPropFn: (option: any) => any;
+  valuePropFn: (option: any) => string;
   options: any[];
 }
 
@@ -57,12 +57,12 @@ export function SearchableSelect(props: SearchableSelectProps) {
   } = props;
 
   // Customprops
-  let { idProps, valueProps } = props as (ICustomIdValueProps & SelectProps);
+  let { keyPropFn, valuePropFn } = props as (ICustomIdValueProps & SelectProps);
 
   // Customprops Undefined? Use defaults
-  if (!idProps && !valueProps) {
-    idProps = (option: IIdValuePair) => option.id;
-    valueProps = (option: IIdValuePair) => option.value;
+  if (!keyPropFn && !valuePropFn) {
+    keyPropFn = (option: IIdValuePair) => option.id;
+    valuePropFn = (option: IIdValuePair) => option.value;
   }
 
   const defaultProps = {
@@ -111,17 +111,17 @@ export function SearchableSelect(props: SearchableSelectProps) {
           options
             .filter((option: IIdValuePair | any) => {
               return (
-                !valueProps(option) ||
-                (valueProps(option) &&
-                  valueProps(option).toLowerCase &&
-                  valueProps(option)
+                !valuePropFn(option) ||
+                (valuePropFn(option) &&
+                  valuePropFn(option).toLowerCase &&
+                  valuePropFn(option)
                     .toLowerCase()
                     .indexOf(query.toLowerCase()) !== -1)
               );
             })
             .map((option: IIdValuePair | any) => (
-              <MenuItem key={idProps(option)} value={idProps(option)}>
-                {highlightQuery(valueProps(option), query)}
+              <MenuItem key={keyPropFn(option)} value={keyPropFn(option)}>
+                {highlightQuery(valuePropFn(option), query)}
               </MenuItem>
             ))}
       </Select>

@@ -22,6 +22,8 @@ Peer Dependencies:
 
 ## How it works
 
+Material UI-Select native is not supported!
+
 ```javascript
 const Example = () => {
   const [value, setValue] = React.useState<unknown>();
@@ -45,6 +47,23 @@ const Example = () => {
     />
   );
 };
+```
+
+With Custom Prop Names
+
+```javascript
+<SearchableSelect
+  label="Searchable Select"
+  value={value}
+  onChange={handleChange}
+  options={[
+    { name: 1, property: "Entry 1" },
+    { name: 2, property: "Entry 2" },
+    { name: 3, property: "Entry 3" }
+  ]}
+  keyPropFn={(option: any) => option.name}
+  valuePropFn={(option: any) => option.property}
+/>
 ```
 
 ## Contributing
