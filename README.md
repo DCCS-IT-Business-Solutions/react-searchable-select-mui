@@ -39,7 +39,10 @@ SearchableSelect renders the following simplified structure:
 ```
 
 All Material UI-Select Props get passed to the Select Component [https://material-ui.com/api/select/](https://material-ui.com/api/select/)
-Material UI-Select native is not supported!!!!
+
+Native is not supported.
+
+Multiple is not supported yet.
 
 Additional Props:
 

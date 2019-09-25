@@ -50,10 +50,61 @@ const SearchableSelectWrapper2 = () => {
   );
 };
 
+const SearchableSelectWrapper3 = () => {
+  const [value, setValue] = React.useState([]);
+
+  const handleChange = (
+    event: React.ChangeEvent<{ name?: string; value: [] }>
+  ) => {
+    debugger;
+    setValue(event.target.value);
+  };
+
+  return (
+    <SearchableSelect
+      label="Searchable Select"
+      value={value}
+      onChange={handleChange}
+      multiple
+      options={[
+        { key: 1, value: "Entry 1" },
+        { key: 2, value: "Entry 2" },
+        { key: 3, value: "Entry 3" }
+      ]}
+    />
+  );
+};
+
+// const SearchableSelectWrapper4 = () => {
+//   const [value, setValue] = React.useState([]);
+
+//   const handleChange = (
+//     event: React.ChangeEvent<{ name?: string; value: [] }>
+//   ) => {
+//     debugger;
+//     setValue(event.target.value);
+//   };
+
+//   return (
+//     <SearchableSelect
+//       label="Searchable Select"
+//       value={value}
+//       onChange={handleChange}
+//       multiple
+//       options={[
+//         { key: 1, value: "Entry 1" },
+//         { key: 2, value: "Entry 2" },
+//         { key: 3, value: "Entry 3" }
+//       ]}
+//     />
+//   );
+// };
+
 storiesOf("Searchable Select", module).add("Examples", () => {
   return (
     <div>
       <SearchableSelectWrapper />
+      <br></br>
       <SearchableSelectWrapper2 />
     </div>
   );
