@@ -14,15 +14,15 @@ interface IBaseProps {
     formControlProps?: FormControlProps;
     formHelperTextProps?: FormHelperTextProps;
 }
-interface IDefaultKeyValueArray extends IBaseProps {
+interface IDefaultKeyValuePair extends IBaseProps {
     options: IKeyValuePair[];
 }
-interface ICustomKeyValueProps extends IBaseProps {
+interface ICustomKeyValuePair extends IBaseProps {
     keyPropFn: (option: IKeyValuePair | any) => any;
     valuePropFn: (option: IKeyValuePair | any) => string;
     options: any[];
 }
-export declare type SearchableSelectProps = (IDefaultKeyValueArray | ICustomKeyValueProps) & SelectProps;
+export declare type SearchableSelectProps = (IDefaultKeyValuePair | ICustomKeyValuePair) & SelectProps;
 export declare function SearchableSelect(props: SearchableSelectProps): JSX.Element;
 export declare namespace SearchableSelect {
     var displayName: string;
