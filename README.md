@@ -22,7 +22,7 @@ Peer Dependencies:
 
 ## How it works
 
-<SearchableSelect> renders the following simplified structure:
+SearchableSelect renders the following simplified structure:
 
 ```javascript
 <FormControl>
@@ -38,7 +38,7 @@ Peer Dependencies:
 </FormControl>
 ```
 
-All Material UI-Select Props get passed to the <Select> Component [https://material-ui.com/api/select/](https://material-ui.com/api/select/)
+All Material UI-Select Props get passed to the Select Component [https://material-ui.com/api/select/](https://material-ui.com/api/select/)
 Material UI-Select native is not supported!!!!
 
 Additional Props:
