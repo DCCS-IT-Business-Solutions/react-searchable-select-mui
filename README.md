@@ -22,7 +22,37 @@ Peer Dependencies:
 
 ## How it works
 
-Material UI-Select native is not supported!
+<SearchableSelect> renders the following simplified structure:
+
+```javascript
+<FormControl>
+  <InputLabel>Label</InputLabel>
+  <Select>
+    <TextField />
+    <MenuItem>Remove Selection</MenuItem>
+    <MenuItem>Option 1</MenuItem>
+    <MenuItem>Option 2</MenuItem>
+    <MenuItem>Option X</MenuItem>
+  </Select>
+  <FormHelperText />
+</FormControl>
+```
+
+All Material UI-Select Props get passed to the <Select> Component [https://material-ui.com/api/select/](https://material-ui.com/api/select/)
+Material UI-Select native is not supported!!!!
+
+Additional Props:
+
+| Name                   | Type                                          | Description                                                                                                                                                             |
+| ---------------------- | --------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| label                  | `string`                                      | Label of the Select Component                                                                                                                                           |
+| searchFieldPlaceholder | `string`                                      | Gets passed to the placeholder property of <TextField>. Default: "Search..."                                                                                            |
+| removeSelectionText    | `string`                                      | Text für the Remove Selection MenuItem. Default: "Remove selection"                                                                                                     |
+| options                | `KeyValuePair[] | any[]`                      | Options to render. By default it expects an array like this: [{key:1, value:"Entry 1"}, {key:2, value:"Entry 2"}].                                                      |
+| keyPropFn              | `(option:KeyValuePair|any)=>any`              | Required function if you want to use a different property names for key and value. If you want to use id instead of key: keyPropFn={(option: any) => option.id}         |
+| valuePropFn            | `(option:KeyValuePair|any)=>any`              | Required function if you want to use a different property names for key and value. If you want to use name instead of value: valuePropFn={(option: any) => option.name} |
+| formControlProps       | https://material-ui.com/api/form-control/     | Props that get passed to the formcontrol component                                                                                                                      |
+| formHelperTextProps    | https://material-ui.com/api/form-helper-text/ | Props that get passed to the FormHelperText component                                                                                                                   |
 
 ```javascript
 const Example = () => {
