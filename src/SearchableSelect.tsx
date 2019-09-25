@@ -82,10 +82,9 @@ export function SearchableSelect(props: SearchableSelectProps) {
           onEnter: () => {
             setQuery("");
           },
-          onExit:() => {
+          onExit: () => {
             setQuery("");
           },
-          onex
           disableAutoFocusItem: true,
           MenuListProps: {
             disableListWrap: true
