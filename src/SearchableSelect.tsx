@@ -23,19 +23,19 @@ interface IBaseProps {
   formHelperTextProps?: FormHelperTextProps;
 }
 
-interface IDefaultKeyValueArray extends IBaseProps {
+interface IDefaultKeyValuePair extends IBaseProps {
   options: IKeyValuePair[];
 }
 
-interface ICustomKeyValueProps extends IBaseProps {
+interface ICustomKeyValuePair extends IBaseProps {
   keyPropFn: (option: IKeyValuePair | any) => any;
   valuePropFn: (option: IKeyValuePair | any) => string;
   options: any[];
 }
 
 export type SearchableSelectProps = (
-  | IDefaultKeyValueArray
-  | ICustomKeyValueProps) &
+  | IDefaultKeyValuePair
+  | ICustomKeyValuePair) &
   SelectProps;
 
 export function SearchableSelect(props: SearchableSelectProps) {
@@ -56,8 +56,7 @@ export function SearchableSelect(props: SearchableSelectProps) {
   } = props;
 
   // Customprops
-  let { keyPropFn, valuePropFn } = props as (ICustomKeyValueProps &
-    SelectProps);
+  let { keyPropFn, valuePropFn } = props as (ICustomKeyValuePair & SelectProps);
 
   // Customprops Undefined? Use defaults
   if (!keyPropFn && !valuePropFn) {
@@ -77,12 +76,12 @@ export function SearchableSelect(props: SearchableSelectProps) {
         // Material UI Bug:
         // => || ""  is needed for the label to work properly.
         value={value || ""}
-        onChange={(e: any, child: any) => {
-          setQuery("");
-          return onChange ? onChange(e, child) : undefined;
-        }}
+        onChange={onChange}
         error={error}
         MenuProps={{
+          onEnter: () => {
+            setQuery("");
+          },
           disableAutoFocusItem: true,
           MenuListProps: {
             disableListWrap: true
