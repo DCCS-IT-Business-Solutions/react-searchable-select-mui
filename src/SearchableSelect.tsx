@@ -7,7 +7,7 @@ import TextField from "@material-ui/core/TextField";
 import { FormHelperText, ListItem } from "@material-ui/core";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import { FormHelperTextProps } from "@material-ui/core/FormHelperText";
-import highlightQuery from "./highlightQuery";
+import { HighlightQuery as highlightQuery } from "@dccs/utils";
 
 interface IKeyValuePair {
   key: any;
