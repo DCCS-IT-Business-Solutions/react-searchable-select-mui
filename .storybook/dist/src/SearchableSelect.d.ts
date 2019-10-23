@@ -2,7 +2,7 @@
 import { SelectProps } from "@material-ui/core/Select";
 import { FormControlProps } from "@material-ui/core/FormControl";
 import { FormHelperTextProps } from "@material-ui/core/FormHelperText";
-interface IKeyValuePair {
+export interface IKeyValuePair {
     key: any;
     value: string;
 }
@@ -2506,6 +2506,15 @@ export declare namespace SearchableSelect {
                 };
             };
             "onTransitionEndCapture": {
+                "defaultValue": null;
+                "description": string;
+                "name": string;
+                "required": boolean;
+                "type": {
+                    "name": string;
+                };
+            };
+            "css": {
                 "defaultValue": null;
                 "description": string;
                 "name": string;

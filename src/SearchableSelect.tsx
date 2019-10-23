@@ -96,7 +96,7 @@ export function SearchableSelect(props: SearchableSelectProps) {
         }}
         {...others}
       >
-        <ClickAwayListener onClickAway={() => {}}>
+        <ClickAwayListener onClickAway={() => null}>
           <ListItem>
             <TextField
               fullWidth
