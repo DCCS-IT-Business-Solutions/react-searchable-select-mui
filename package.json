@@ -42,7 +42,7 @@
     "url": "https://github.com/DCCS-IT-Business-Solutions/react-searchable-select-mui/issues"
   },
   "homepage": "https://github.com/DCCS-IT-Business-Solutions/react-searchable-select-mui#readme",
-  "dependencies":{
+  "dependencies": {
     "@dccs/utils": "0.2.1"
   },
   "peerDependencies": {

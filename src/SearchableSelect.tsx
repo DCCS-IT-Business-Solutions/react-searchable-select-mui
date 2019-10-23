@@ -9,7 +9,7 @@ import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import { FormHelperTextProps } from "@material-ui/core/FormHelperText";
 import { HighlightQuery as highlightQuery } from "@dccs/utils";
 
-interface IKeyValuePair {
+export interface IKeyValuePair {
   key: any;
   value: string;
 }
@@ -58,6 +58,10 @@ export function SearchableSelect(props: SearchableSelectProps) {
   // Customprops
   let { keyPropFn, valuePropFn } = props as (ICustomKeyValuePair & SelectProps);
 
+  // Remove keyPropFn and valuePropFn to not get passed down to the select component
+  delete (others as any).keyPropFn;
+  delete (others as any).valuePropFn;
+
   // Customprops Undefined? Use defaults
   if (!keyPropFn && !valuePropFn) {
     keyPropFn = (option: IKeyValuePair) => option.key;
@@ -92,7 +96,7 @@ export function SearchableSelect(props: SearchableSelectProps) {
         }}
         {...others}
       >
-        <ClickAwayListener onClickAway={() => null}>
+        <ClickAwayListener onClickAway={() => {}}>
           <ListItem>
             <TextField
               fullWidth
