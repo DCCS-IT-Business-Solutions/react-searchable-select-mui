@@ -38,6 +38,37 @@ export type SearchableSelectProps = (
   | ICustomKeyValuePair) &
   SelectProps;
 
+interface ClickAwayListenerWrapperProps {
+  searchFieldPlaceholder: string | undefined;
+  setQuery: React.Dispatch<React.SetStateAction<string>>;
+}
+
+class ClickAwayListenerWrapper extends React.Component<
+  ClickAwayListenerWrapperProps
+> {
+  render() {
+    const { searchFieldPlaceholder, setQuery } = this.props;
+
+    return (
+      <ClickAwayListener onClickAway={() => null}>
+        <ListItem>
+          <TextField
+            fullWidth
+            placeholder={searchFieldPlaceholder || "Search..."}
+            onChange={e => {
+              setQuery(e.target.value);
+            }}
+            onKeyDown={e => {
+              // Prevent MUI-Autoselect while typing
+              e.stopPropagation();
+            }}
+          />
+        </ListItem>
+      </ClickAwayListener>
+    );
+  }
+}
+
 export function SearchableSelect(props: SearchableSelectProps) {
   const [query, setQuery] = React.useState("");
 
@@ -96,21 +127,10 @@ export function SearchableSelect(props: SearchableSelectProps) {
         }}
         {...others}
       >
-        <ClickAwayListener onClickAway={() => null}>
-          <ListItem>
-            <TextField
-              fullWidth
-              placeholder={searchFieldPlaceholder || "Search..."}
-              onChange={e => {
-                setQuery(e.target.value);
-              }}
-              onKeyDown={e => {
-                // Prevent MUI-Autoselect while typing
-                e.stopPropagation();
-              }}
-            />
-          </ListItem>
-        </ClickAwayListener>
+        <ClickAwayListenerWrapper
+          searchFieldPlaceholder={searchFieldPlaceholder}
+          setQuery={setQuery}
+        />
         <MenuItem>{removeSelectionText || "Remove selection"}</MenuItem>
         {options &&
           options.filter &&
