@@ -21,6 +21,8 @@ interface IBaseProps {
   helperText?: string;
   formControlProps?: FormControlProps;
   formHelperTextProps?: FormHelperTextProps;
+  maxVisibleOptions?: number;
+  showAll?: boolean;
 }
 
 interface IDefaultKeyValuePair extends IBaseProps {
@@ -43,7 +45,11 @@ interface IClickAwayListenerWrapperProps {
   setQuery: React.Dispatch<React.SetStateAction<string>>;
 }
 
-class ClickAwayListenerWrapper extends React.Component<
+// Needed because otherwise MUI-Select passes down props to the ClickAwayListeneder
+// This Component ignores those props
+// Additionally it has to be a React.Component instead of a functional component
+// Since functional components can't have a "ref"
+class SearchFieldWrapper extends React.Component<
   IClickAwayListenerWrapperProps
 > {
   render() {
@@ -83,6 +89,8 @@ export function SearchableSelect(props: SearchableSelectProps) {
     options,
     formControlProps,
     formHelperTextProps,
+    showAll,
+    maxVisibleOptions,
     ...others
   } = props;
 
@@ -102,6 +110,32 @@ export function SearchableSelect(props: SearchableSelectProps) {
   const defaultProps = {
     style: { minWidth: "240px" }
   };
+
+  function renderFilteredOptions() {
+    let filteredOptions =
+      options &&
+      options.filter &&
+      options.filter((option: IKeyValuePair | any) => {
+        return (
+          !valuePropFn(option) ||
+          (valuePropFn(option) &&
+            valuePropFn(option).toLowerCase &&
+            valuePropFn(option)
+              .toLowerCase()
+              .indexOf(query.toLowerCase()) !== -1)
+        );
+      });
+
+    if (!showAll) {
+      filteredOptions = filteredOptions.slice(0, maxVisibleOptions || 20);
+    }
+
+    return filteredOptions.map((option: IKeyValuePair | any) => (
+      <MenuItem key={keyPropFn(option)} value={keyPropFn(option)}>
+        {highlightQuery(valuePropFn(option), query)}
+      </MenuItem>
+    ));
+  }
 
   return (
     <FormControl margin="normal" {...formControlProps}>
@@ -127,29 +161,12 @@ export function SearchableSelect(props: SearchableSelectProps) {
         }}
         {...others}
       >
-        <ClickAwayListenerWrapper
+        <SearchFieldWrapper
           searchFieldPlaceholder={searchFieldPlaceholder}
           setQuery={setQuery}
         />
         <MenuItem>{removeSelectionText || "Remove selection"}</MenuItem>
-        {options &&
-          options.filter &&
-          options
-            .filter((option: IKeyValuePair | any) => {
-              return (
-                !valuePropFn(option) ||
-                (valuePropFn(option) &&
-                  valuePropFn(option).toLowerCase &&
-                  valuePropFn(option)
-                    .toLowerCase()
-                    .indexOf(query.toLowerCase()) !== -1)
-              );
-            })
-            .map((option: IKeyValuePair | any) => (
-              <MenuItem key={keyPropFn(option)} value={keyPropFn(option)}>
-                {highlightQuery(valuePropFn(option), query)}
-              </MenuItem>
-            ))}
+        {renderFilteredOptions()}
       </Select>
       <FormHelperText error={error} {...formHelperTextProps}>
         {helperText}

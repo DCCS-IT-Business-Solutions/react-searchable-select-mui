@@ -1,6 +1,15 @@
 import * as React from "react";
 import { storiesOf } from "@storybook/react";
-import { SearchableSelect } from "../src/SearchableSelect";
+import { SearchableSelect, IKeyValuePair } from "../src/SearchableSelect";
+
+function generateOptions() {
+  const options = [];
+
+  for (let i = 1; i <= 100; i++) {
+    options.push({ key: i, value: `Entry ${i}` });
+  }
+  return options as IKeyValuePair[];
+}
 
 const SearchableSelectWrapper = () => {
   const [value, setValue] = React.useState<unknown>();
@@ -41,11 +50,7 @@ const SearchableSelectWrapper2 = () => {
       label="Searchable Select"
       value={value}
       onChange={handleChange}
-      options={[
-        { key: 1, value: "Entry 1" },
-        { key: 2, value: "Entry 2" },
-        { key: 3, value: "Entry 3" }
-      ]}
+      options={generateOptions()}
     />
   );
 };
@@ -56,7 +61,6 @@ const SearchableSelectWrapper3 = () => {
   const handleChange = (
     event: React.ChangeEvent<{ name?: string; value: [] }>
   ) => {
-    debugger;
     setValue(event.target.value);
   };
 
@@ -65,47 +69,53 @@ const SearchableSelectWrapper3 = () => {
       label="Searchable Select"
       value={value}
       onChange={handleChange}
-      multiple
-      options={[
-        { key: 1, value: "Entry 1" },
-        { key: 2, value: "Entry 2" },
-        { key: 3, value: "Entry 3" }
-      ]}
+      maxVisibleOptions={50}
+      options={generateOptions()}
     />
   );
 };
 
-// const SearchableSelectWrapper4 = () => {
-//   const [value, setValue] = React.useState([]);
+const SearchableSelectWrapper4 = () => {
+  const [value, setValue] = React.useState([]);
 
-//   const handleChange = (
-//     event: React.ChangeEvent<{ name?: string; value: [] }>
-//   ) => {
-//     debugger;
-//     setValue(event.target.value);
-//   };
+  const handleChange = (
+    event: React.ChangeEvent<{ name?: string; value: [] }>
+  ) => {
+    setValue(event.target.value);
+  };
 
-//   return (
-//     <SearchableSelect
-//       label="Searchable Select"
-//       value={value}
-//       onChange={handleChange}
-//       multiple
-//       options={[
-//         { key: 1, value: "Entry 1" },
-//         { key: 2, value: "Entry 2" },
-//         { key: 3, value: "Entry 3" }
-//       ]}
-//     />
-//   );
-// };
+  return (
+    <SearchableSelect
+      label="Searchable Select"
+      value={value}
+      onChange={handleChange}
+      showAll={true}
+      options={generateOptions()}
+    />
+  );
+};
 
 storiesOf("Searchable Select", module).add("Examples", () => {
   return (
     <div>
+      Custom Props:
+      <br></br>
       <SearchableSelectWrapper />
       <br></br>
+      Standard: (shows 20 options by default)
+      <br></br>
       <SearchableSelectWrapper2 />
+      <br></br>
+      With maxVisibleOptions set to 50:
+      <br></br>
+      <SearchableSelectWrapper3 />
+      <br></br>
+      With showAll set to true
+      <br></br>
+      <SearchableSelectWrapper4 />
+      <br></br>
+      It's not advised to render all options if it exceeds ~20-50 Items.
+      MUI-MenuItems are very slow
     </div>
   );
 });
