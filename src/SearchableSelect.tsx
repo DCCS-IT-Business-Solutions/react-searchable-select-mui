@@ -38,13 +38,13 @@ export type SearchableSelectProps = (
   | ICustomKeyValuePair) &
   SelectProps;
 
-interface ClickAwayListenerWrapperProps {
+interface IClickAwayListenerWrapperProps {
   searchFieldPlaceholder: string | undefined;
   setQuery: React.Dispatch<React.SetStateAction<string>>;
 }
 
 class ClickAwayListenerWrapper extends React.Component<
-  ClickAwayListenerWrapperProps
+  IClickAwayListenerWrapperProps
 > {
   render() {
     const { searchFieldPlaceholder, setQuery } = this.props;
