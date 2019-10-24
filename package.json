@@ -1,6 +1,6 @@
 {
   "name": "@dccs/react-searchable-select-mui",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "description": "Searchable Select MUI",
   "main": "lib/index.js",
   "scripts": {
