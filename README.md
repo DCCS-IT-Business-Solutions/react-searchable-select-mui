@@ -56,6 +56,8 @@ Additional Props:
 | valuePropFn            | `(option:KeyValuePair or any)=>any`           | Required function if you want to use a different property names for key and value. If you want to use name instead of value: valuePropFn={(option: any) => option.name} |
 | formControlProps       | https://material-ui.com/api/form-control/     | Props that get passed to the formcontrol component                                                                                                                      |
 | formHelperTextProps    | https://material-ui.com/api/form-helper-text/ | Props that get passed to the FormHelperText component                                                                                                                   |
+| showAll                | `boolean`                                     | If true it shows all available options. Undefined or false shows 20 per default                                                                                         |
+| maxVisibleOptions      | `number`                                      | Set the number of visible options to show. (Choose number below 50 since MUI-MenuItems are very laggy)                                                                  |
 
 ```javascript
 const Example = () => {

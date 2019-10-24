@@ -13,6 +13,8 @@ interface IBaseProps {
     helperText?: string;
     formControlProps?: FormControlProps;
     formHelperTextProps?: FormHelperTextProps;
+    maxVisibleOptions?: number;
+    showAll?: boolean;
 }
 interface IDefaultKeyValuePair extends IBaseProps {
     options: IKeyValuePair[];
@@ -85,6 +87,24 @@ export declare namespace SearchableSelect {
                 };
             };
             "formHelperTextProps": {
+                "defaultValue": null;
+                "description": string;
+                "name": string;
+                "required": boolean;
+                "type": {
+                    "name": string;
+                };
+            };
+            "maxVisibleOptions": {
+                "defaultValue": null;
+                "description": string;
+                "name": string;
+                "required": boolean;
+                "type": {
+                    "name": string;
+                };
+            };
+            "showAll": {
                 "defaultValue": null;
                 "description": string;
                 "name": string;
