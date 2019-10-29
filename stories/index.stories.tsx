@@ -1,6 +1,7 @@
 import * as React from "react";
 import { storiesOf } from "@storybook/react";
 import { SearchableSelect, IKeyValuePair } from "../src/SearchableSelect";
+import { Button } from "@material-ui/core";
 
 function generateOptions() {
   const options = [];
@@ -26,9 +27,9 @@ const SearchableSelectWrapper = () => {
       value={value}
       onChange={handleChange}
       options={[
-        { name: 1, property: "Entry 1" },
-        { name: 2, property: "Entry 2" },
-        { name: 3, property: "Entry 3" }
+        { name: 1, property: "1" },
+        { name: 2, property: "2" },
+        { name: 3, property: "3" }
       ]}
       keyPropFn={(option: any) => option.name}
       valuePropFn={(option: any) => option.property}
@@ -37,21 +38,23 @@ const SearchableSelectWrapper = () => {
 };
 
 const SearchableSelectWrapper2 = () => {
-  const [value, setValue] = React.useState<unknown>();
+  const [value, setValue] = React.useState<number>(20);
 
   const handleChange = (
-    event: React.ChangeEvent<{ name?: string; value: unknown }>
+    event: React.ChangeEvent<{ name?: string; value: number }>
   ) => {
     setValue(event.target.value);
   };
 
   return (
-    <SearchableSelect
-      label="Searchable Select"
-      value={value}
-      onChange={handleChange}
-      options={generateOptions()}
-    />
+    <React.Fragment>
+      <SearchableSelect
+        label="Searchable Select"
+        value={value}
+        onChange={handleChange}
+        options={generateOptions()}
+      />
+    </React.Fragment>
   );
 };
 

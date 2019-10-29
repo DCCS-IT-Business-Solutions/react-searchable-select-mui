@@ -31,7 +31,7 @@ interface IDefaultKeyValuePair extends IBaseProps {
 
 interface ICustomKeyValuePair extends IBaseProps {
   keyPropFn: (option: IKeyValuePair | any) => any;
-  valuePropFn: (option: IKeyValuePair | any) => string;
+  valuePropFn: (option: IKeyValuePair | any) => string | number;
   options: any[];
 }
 
@@ -119,8 +119,8 @@ export function SearchableSelect(props: SearchableSelectProps) {
         return (
           !valuePropFn(option) ||
           (valuePropFn(option) &&
-            valuePropFn(option).toLowerCase &&
             valuePropFn(option)
+              .toString()
               .toLowerCase()
               .indexOf(query.toLowerCase()) !== -1)
         );
@@ -128,13 +128,26 @@ export function SearchableSelect(props: SearchableSelectProps) {
 
     if (!showAll) {
       filteredOptions = filteredOptions.slice(0, maxVisibleOptions || 20);
+
+      const selectedOption = options.find(
+        option => value === keyPropFn(option)
+      );
+
+      if (selectedOption) {
+        if (filteredOptions.indexOf(selectedOption) === -1) {
+          filteredOptions.push(selectedOption);
+        }
+      }
     }
 
-    return filteredOptions.map((option: IKeyValuePair | any) => (
-      <MenuItem key={keyPropFn(option)} value={keyPropFn(option)}>
-        {highlightQuery(valuePropFn(option), query)}
-      </MenuItem>
-    ));
+    return filteredOptions.map((option: IKeyValuePair | any) => {
+      const searchVal = valuePropFn(option).toString();
+      return (
+        <MenuItem key={keyPropFn(option)} value={keyPropFn(option)}>
+          {highlightQuery(searchVal, query)}
+        </MenuItem>
+      );
+    });
   }
 
   return (
