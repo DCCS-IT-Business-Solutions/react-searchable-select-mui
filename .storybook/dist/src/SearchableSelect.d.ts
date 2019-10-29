@@ -21,7 +21,7 @@ interface IDefaultKeyValuePair extends IBaseProps {
 }
 interface ICustomKeyValuePair extends IBaseProps {
     keyPropFn: (option: IKeyValuePair | any) => any;
-    valuePropFn: (option: IKeyValuePair | any) => string;
+    valuePropFn: (option: IKeyValuePair | any) => string | number;
     options: any[];
 }
 export declare type SearchableSelectProps = (IDefaultKeyValuePair | ICustomKeyValuePair) & SelectProps;
