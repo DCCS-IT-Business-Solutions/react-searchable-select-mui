@@ -38,7 +38,7 @@ const SearchableSelectWrapper = () => {
 };
 
 const SearchableSelectWrapper2 = () => {
-  const [value, setValue] = React.useState<number>(20);
+  const [value, setValue] = React.useState<number>(21);
 
   const handleChange = (
     event: React.ChangeEvent<{ name?: string; value: number }>
@@ -106,6 +106,8 @@ storiesOf("Searchable Select", module).add("Examples", () => {
       <SearchableSelectWrapper />
       <br></br>
       Standard: (shows 20 options by default)
+      <br></br>
+      Initial Value is set to 21
       <br></br>
       <SearchableSelectWrapper2 />
       <br></br>
