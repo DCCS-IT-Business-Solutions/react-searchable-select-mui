@@ -8,7 +8,6 @@
     "build": "npm-run-all -s lint transpile build-storybook",
     "transpile": "tsc",
     "lint": "tslint ./src/**/*.ts*",
-    "postinstall": "rimraf node_modules/@date-io/date-fns/type/index.d.ts",
     "test": "jest --runInBand --coverage --passWithNoTests",
     "storybook": "start-storybook -p 6006 -c .storybook",
     "build-storybook": "build-storybook -o docs"
