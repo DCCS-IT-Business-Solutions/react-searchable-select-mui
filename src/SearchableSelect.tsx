@@ -4,7 +4,7 @@ import FormControl, { FormControlProps } from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import TextField from "@material-ui/core/TextField";
-import { FormHelperText, ListItem } from "@material-ui/core";
+import { FormHelperText, ListItem, ListSubheader } from "@material-ui/core";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import { FormHelperTextProps } from "@material-ui/core/FormHelperText";
 import { HighlightQuery as highlightQuery } from "@dccs/utils";
@@ -14,9 +14,16 @@ export interface IKeyValuePair {
   value: string;
 }
 
+export interface IGroupStruct {
+  title: string;
+  data: any[];
+}
+
 interface IBaseProps {
   label?: string;
   searchFieldPlaceholder?: string;
+  hideRemoveSelection?: boolean;
+  grouped?: boolean;
   removeSelectionText?: string;
   helperText?: string;
   formControlProps?: FormControlProps;
@@ -83,10 +90,12 @@ export function SearchableSelect(props: SearchableSelectProps) {
     error,
     searchFieldPlaceholder,
     removeSelectionText,
+    hideRemoveSelection,
     value,
     onChange,
     helperText,
     options,
+    grouped = false,
     formControlProps,
     formHelperTextProps,
     showAll,
@@ -112,20 +121,19 @@ export function SearchableSelect(props: SearchableSelectProps) {
   };
 
   function renderFilteredOptions() {
-    let filteredOptions =
-      options &&
-      options.filter &&
-      options.filter((option: IKeyValuePair | any) => {
-        return (
-          !valuePropFn(option) ||
-          (valuePropFn(option) &&
-            valuePropFn(option)
-              .toString()
-              .toLowerCase()
-              .indexOf(query.toLowerCase()) !== -1)
-        );
-      });
-
+    let filteredOptions = 
+    options &&
+    options.filter &&
+    options.filter((option: IKeyValuePair | any) => {
+      return (
+        !valuePropFn(option) ||
+        (valuePropFn(option) &&
+          valuePropFn(option)
+            .toString()
+            .toLowerCase()
+            .indexOf(query.toLowerCase()) !== -1)
+      );
+    });
     if (!showAll) {
       filteredOptions = filteredOptions.slice(0, maxVisibleOptions || 20);
 
@@ -148,6 +156,41 @@ export function SearchableSelect(props: SearchableSelectProps) {
         </MenuItem>
       );
     });
+  }
+
+  function renderGroupedOptions() {
+    const mapableOptions = [...options] as any
+    const filteredOptions = 
+    mapableOptions &&
+    mapableOptions.map &&
+    mapableOptions.map((group: IGroupStruct | any) => {
+      return ({
+        title: group.title,
+        data: group.data.filter((option: IKeyValuePair | any) => {
+          return (
+            !valuePropFn(option) ||
+            (valuePropFn(option) &&
+              valuePropFn(option)
+                .toString()
+                .toLowerCase()
+                .indexOf(query.toLowerCase()) !== -1)
+          );
+        })
+      })
+    });
+    return filteredOptions.map((group: IGroupStruct | any, index: any) => (
+      [
+        <ListSubheader key={group.title} style={{ background: '#fff' }}>{group.title}</ListSubheader>,
+          group.data.map((option: IKeyValuePair | any) => {
+            const searchVal = valuePropFn(option).toString();
+            return (
+              <MenuItem key={keyPropFn(option)} value={keyPropFn(option)}>
+                {highlightQuery(searchVal, query)}
+              </MenuItem>
+            );
+          })
+      ]
+    ));
   }
 
   return (
@@ -178,8 +221,8 @@ export function SearchableSelect(props: SearchableSelectProps) {
           searchFieldPlaceholder={searchFieldPlaceholder}
           setQuery={setQuery}
         />
-        <MenuItem>{removeSelectionText || "Remove selection"}</MenuItem>
-        {renderFilteredOptions()}
+        {!hideRemoveSelection && <MenuItem>{removeSelectionText || "Remove selection"}</MenuItem>}
+        {grouped ? renderGroupedOptions() : renderFilteredOptions()}
       </Select>
       <FormHelperText error={error} {...formHelperTextProps}>
         {helperText}

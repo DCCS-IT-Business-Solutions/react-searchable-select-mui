@@ -2,8 +2,6 @@
 
 A simple custom select component including a searchfield.
 
-Here is a Demo:[https://dccs-it-business-solutions.github.io/react-searchable-select-mui/](https://dccs-it-business-solutions.github.io/react-searchable-select-mui/)
-
 ## Installation
 
 You should install [react-searchable-select-mui with npm or yarn](https://www.npmjs.com/package/@dccs/react-searchable-select-mui):
@@ -50,7 +48,8 @@ Additional Props:
 | ---------------------- | --------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | label                  | `string`                                      | Label of the Select Component                                                                                                                                           |
 | searchFieldPlaceholder | `string`                                      | Gets passed to the placeholder property of <TextField>. Default: "Search..."                                                                                            |
-| removeSelectionText    | `string`                                      | Text für the Remove Selection MenuItem. Default: "Remove selection"                                                                                                     |
+| removeSelectionText    | `string`                                      | Text für the Remove Selection MenuItem. Default: "Remove selection"                                                                                                |
+| hideRemoveSelection    | `boolean`                                     | If true will not add a remove selection option. False by default                                                                                                    |
 | options                | `KeyValuePair[] or any[]`                     | Options to render. By default it expects an array like this: [{key:1, value:"Entry 1"}, {key:2, value:"Entry 2"}].                                                      |
 | keyPropFn              | `(option:KeyValuePair or any)=>any`           | Required function if you want to use a different property names for key and value. If you want to use id instead of key: keyPropFn={(option: any) => option.id}         |
 | valuePropFn            | `(option:KeyValuePair or any)=>any`           | Required function if you want to use a different property names for key and value. If you want to use name instead of value: valuePropFn={(option: any) => option.name} |

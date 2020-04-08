@@ -98,9 +98,92 @@ const SearchableSelectWrapper4 = () => {
   );
 };
 
+const SearchableSelectWrapper5 = () => {
+  const [value, setValue] = React.useState<unknown>();
+
+  const handleChange = (
+    event: React.ChangeEvent<{ name?: string; value: unknown }>
+  ) => {
+    setValue(event.target.value);
+  };
+
+  return (
+    <SearchableSelect
+      label="Searchable Select"
+      hideRemoveSelection={true}
+      value={value}
+      onChange={handleChange}
+      options={[
+        { name: 1, property: "1" },
+        { name: 2, property: "2" },
+        { name: 3, property: "3" }
+      ]}
+      keyPropFn={(option: any) => option.name}
+      valuePropFn={(option: any) => option.property}
+    />
+  );
+};
+
+const SearchableSelectWrapper6 = () => {
+  const [value, setValue] = React.useState<unknown>();
+
+  const handleChange = (
+    event: React.ChangeEvent<{ name?: string; value: unknown }>
+  ) => {
+    setValue(event.target.value);
+  };
+
+  return (
+    <SearchableSelect
+      label="Searchable Select"
+      hideRemoveSelection={true}
+      value={value}
+      grouped={true}
+      onChange={handleChange}
+      options={[
+        {
+          title: 'Group 1',
+          data: [
+            { name: 1, property: "1" },
+            { name: 2, property: "2" },
+            { name: 3, property: "3" }
+          ]
+        },
+        {
+          title: 'Group 2',
+          data: [
+            { name: 4, property: "4" },
+            { name: 5, property: "5" },
+            { name: 6, property: "6" }
+          ]
+        },
+        {
+          title: 'Group 3',
+          data: [
+            { name: 7, property: "7" },
+            { name: 8, property: "8" },
+            { name: 9, property: "9" }
+          ]
+        },
+      ]}
+      keyPropFn={(option: any) => option.name}
+      valuePropFn={(option: any) => option.property}
+    />
+  );
+};
+
 storiesOf("Searchable Select", module).add("Examples", () => {
   return (
     <div>
+      <br></br>
+      Grouped Selections:
+      <br></br>
+      <SearchableSelectWrapper6 />
+      <br></br>
+      No remove selection option:
+      <br></br>
+      <SearchableSelectWrapper5 />
+      <br></br>
       Custom Props:
       <br></br>
       <SearchableSelectWrapper />
