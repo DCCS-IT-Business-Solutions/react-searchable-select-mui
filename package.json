@@ -1,6 +1,6 @@
 {
-  "name": "@dccs/react-searchable-select-mui",
-  "version": "0.2.11",
+  "name": "@engagespark/react-searchable-select-mui",
+  "version": "0.2.15",
   "description": "Searchable Select MUI",
   "main": "lib/index.js",
   "scripts": {
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DCCS-IT-Business-Solutions/react-searchable-select-mui.git"
+    "url": "git+https://github.com/engagespark/react-searchable-select-mui.git"
   },
   "keywords": [
     "npm",
@@ -38,9 +38,9 @@
   "author": "Manuel Vitzthum",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/DCCS-IT-Business-Solutions/react-searchable-select-mui/issues"
+    "url": "https://github.com/engagespark/react-searchable-select-mui/issues"
   },
-  "homepage": "https://github.com/DCCS-IT-Business-Solutions/react-searchable-select-mui#readme",
+  "homepage": "https://github.com/engagespark/react-searchable-select-mui#readme",
   "dependencies": {
     "@dccs/utils": "0.2.1"
   },
