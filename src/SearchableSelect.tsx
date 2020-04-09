@@ -85,6 +85,8 @@ class SearchFieldWrapper extends React.Component<
 export function SearchableSelect(props: SearchableSelectProps) {
   const [query, setQuery] = React.useState("");
 
+  React.useEffect(() => setQuery(""), []);
+
   const {
     label,
     error,
@@ -205,10 +207,10 @@ export function SearchableSelect(props: SearchableSelectProps) {
         error={error}
         MenuProps={{
           onEnter: () => {
-            setQuery("");
+            // setQuery("");
           },
           onExit: () => {
-            setQuery("");
+            // setQuery("");
           },
           disableAutoFocusItem: true,
           MenuListProps: {

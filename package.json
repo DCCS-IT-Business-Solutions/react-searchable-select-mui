@@ -1,6 +1,6 @@
 {
   "name": "@engagespark/react-searchable-select-mui",
-  "version": "0.2.13",
+  "version": "0.2.15",
   "description": "Searchable Select MUI",
   "main": "lib/index.js",
   "scripts": {
