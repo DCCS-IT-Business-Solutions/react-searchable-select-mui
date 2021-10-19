@@ -61,6 +61,7 @@
     "@types/react-dom": "16.8.5",
     "@types/storybook__react": "^4.0.2",
     "@types/styled-components": "^4.1.18",
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.3",
     "awesome-typescript-loader": "^5.2.1",
     "babel-loader": "^8.0.6",
     "enzyme": "^3.10.0",
